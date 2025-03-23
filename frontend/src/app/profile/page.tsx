@@ -1,34 +1,50 @@
-"use client";
+'use client';
 
 import { useAuth } from "@/contexts/AuthContext";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { ChevronDown, Mail, Calendar, MapPin, Award, LogOut, Shield, Settings } from "lucide-react";
+import {
+  ChevronDown,
+  Mail,
+  Calendar,
+  MapPin,
+  Award,
+  LogOut,
+  Shield,
+  Settings,
+} from "lucide-react";
 
 const Profile = () => {
   const { user, logout, token } = useAuth();
   const router = useRouter();
   const [showStats, setShowStats] = useState(false);
-  
+
   useEffect(() => {
     if (!token) {
       router.push("/auth/login"); // Redirect to login if not authenticated
     }
   }, [token, router]);
 
+  // Updated stats for mental health profile
   const stats = {
     joined: "March 2024",
     location: "San Francisco, CA",
-    achievements: ["Early Adopter", "Power User", "Team Player"],
-    points: 1250
+    achievements: ["Mindful Achiever", "Resilient", "Wellness Warrior"],
+    points: 1250,
   };
 
   if (!user) {
     return (
-      <div className="flex justify-center items-center min-h-screen bg-gray-100">
-        <div className="flex flex-col items-center gap-4">
-          <div className="w-16 h-16 border-4 border-gray-400 border-t-transparent rounded-full animate-spin"></div>
-          <div className="text-gray-700 text-xl font-medium">Loading your profile...</div>
+      <div className="flex justify-center items-center h-screen w-screen bg-gradient-to-br from-white to-gray-50">
+        <div className="flex flex-col items-center">
+          <div className="w-16 h-16 relative">
+            <div className="absolute top-0 w-full h-full rounded-full border-4 border-t-blue-500 border-r-transparent border-b-transparent border-l-transparent animate-spin"></div>
+            <div
+              className="absolute top-2 left-2 w-12 h-12 rounded-full border-4 border-t-transparent border-r-transparent border-b-blue-300 border-l-transparent animate-spin"
+              style={{ animationDirection: "reverse" }}
+            ></div>
+          </div>
+          <p className="mt-4 text-gray-500 font-medium">Connecting...</p>
         </div>
       </div>
     );
@@ -39,9 +55,9 @@ const Profile = () => {
       {/* Header */}
       <header className="w-full bg-white shadow-md py-4 mb-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-          <h1 className="text-3xl font-bold text-gray-800">Profile Dashboard</h1>
-          <button 
-            onClick={() => router.push('/settings')} 
+          <h1 className="text-3xl font-bold text-gray-800">My Mental Health Profile</h1>
+          <button
+            onClick={() => router.push('/settings')}
             className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition-all"
           >
             <Settings size={20} className="text-gray-700" />
@@ -96,7 +112,7 @@ const Profile = () => {
 
                 {/* Achievements */}
                 <div className="mt-6">
-                  <button 
+                  <button
                     onClick={() => setShowStats(!showStats)}
                     className="w-full flex items-center justify-between bg-gray-200 hover:bg-gray-300 rounded-lg p-3 transition-all text-gray-800"
                   >
@@ -106,7 +122,7 @@ const Profile = () => {
                     </span>
                     <ChevronDown size={18} className={`transition-transform ${showStats ? 'rotate-180' : ''}`} />
                   </button>
-                  
+
                   {showStats && (
                     <div className="mt-3 bg-gray-50 rounded-lg p-4 border border-gray-200 animate-fadeIn">
                       <div className="flex flex-wrap gap-2">
@@ -135,9 +151,9 @@ const Profile = () => {
 
           {/* Right Column */}
           <div className="flex-1 flex flex-col gap-4">
-            {/* Recent Activity */}
+            {/* Therapy Activity */}
             <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-200">
-              <h3 className="text-xl font-bold text-gray-800 mb-4">Recent Activity</h3>
+              <h3 className="text-xl font-bold text-gray-800 mb-4">Therapy Activity</h3>
               <div className="space-y-4">
                 {[1, 2, 3].map((_, i) => (
                   <div key={i} className="border-b border-gray-200 pb-3 last:border-0">
@@ -147,9 +163,15 @@ const Profile = () => {
                       </div>
                       <div>
                         <p className="text-gray-800 font-medium">
-                          {i === 0 ? "Updated profile picture" : i === 1 ? "Completed dashboard setup" : "Joined the platform"}
+                          {i === 0
+                            ? "Updated therapy session details"
+                            : i === 1
+                            ? "Completed weekly mood assessment"
+                            : "Joined our mental wellness community"}
                         </p>
-                        <p className="text-gray-500 text-sm">{i === 0 ? "1 day ago" : i === 1 ? "3 days ago" : "1 week ago"}</p>
+                        <p className="text-gray-500 text-sm">
+                          {i === 0 ? "1 day ago" : i === 1 ? "3 days ago" : "1 week ago"}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -157,11 +179,11 @@ const Profile = () => {
               </div>
             </div>
 
-            {/* Connected Accounts */}
+            {/* Connected Health Apps */}
             <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-200">
-              <h3 className="text-xl font-bold text-gray-800 mb-4">Connected Accounts</h3>
+              <h3 className="text-xl font-bold text-gray-800 mb-4">Connected Health Apps</h3>
               <div className="space-y-3">
-                {["Google", "GitHub", "Twitter"].map((platform, i) => (
+                {["HealthSync", "CalmApp", "MoodTracker"].map((platform, i) => (
                   <div key={i} className="flex items-center justify-between p-3 rounded-lg bg-gray-100 hover:bg-gray-200 transition-all cursor-pointer">
                     <span className="text-gray-800">{platform}</span>
                     <span className={`text-sm px-2 py-1 rounded ${i === 0 ? "bg-green-500 text-white" : "bg-gray-300 text-gray-700"}`}>

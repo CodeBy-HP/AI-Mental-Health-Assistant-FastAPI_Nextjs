@@ -6,7 +6,11 @@ import Link from "next/link";
 
 const Register = () => {
   const { register } = useAuth();
-  const [formData, setFormData] = useState({ username: "", email: "", password: "" });
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -20,11 +24,9 @@ const Register = () => {
   return (
     <div className="flex min-h-screen flex-col justify-center px-6 py-12 bg-white">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <img
-          alt="Your Company"
-          src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
-          className="mx-auto h-10 w-auto"
-        />
+        <div className="h-10 w-10 rounded-md bg-gradient-to-r from-blue-400 to-indigo-700 flex items-center justify-center text-white font-bold mx-auto ">
+          AI
+        </div>
         <h2 className="mt-10 text-center text-2xl font-bold tracking-tight text-gray-900">
           Create an account
         </h2>
@@ -33,7 +35,10 @@ const Register = () => {
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="username" className="block text-sm font-medium text-gray-900">
+            <label
+              htmlFor="username"
+              className="block text-sm font-medium text-gray-900"
+            >
               Username
             </label>
             <input
@@ -47,7 +52,10 @@ const Register = () => {
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-900">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-900"
+            >
               Email
             </label>
             <input
@@ -61,7 +69,10 @@ const Register = () => {
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-900">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-900"
+            >
               Password
             </label>
             <input

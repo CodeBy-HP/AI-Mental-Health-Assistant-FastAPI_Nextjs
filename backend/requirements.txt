@@ -8,3 +8,7 @@ passlib[bcrypt]
 PyJWT
 python-decouple
 python-multipart
+groq 
+langchain
+langchain-groq
+langchain_community

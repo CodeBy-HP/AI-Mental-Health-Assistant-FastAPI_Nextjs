@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const register = async (username: string, email: string, password: string) => {
     await registerUser({ username, email, password });
-    router.push("/login"); // Redirect after registration
+    router.push("/auth/login"); // Redirect after registration
   };
 
   const logout = () => {

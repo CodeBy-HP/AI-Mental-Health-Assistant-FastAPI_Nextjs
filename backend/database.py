@@ -5,7 +5,9 @@ from .models import Base
 
 DATABASE_URL = "sqlite:///./test.db"  # You can use any database here
 
-engine = create_engine(DATABASE_URL)
+
+# added ->  connect_args={"check_same_thread": False}
+engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 metadata = MetaData()
 

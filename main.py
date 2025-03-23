@@ -5,6 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from backend.routers import auth
 from backend.routers import user
+from backend.routers import business_api
 
 app = FastAPI(debug=True)
 
@@ -22,6 +23,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(business_api.router, prefix="/api")
 app.include_router(user.router)
 app.include_router(auth.router, prefix="/auth")
 

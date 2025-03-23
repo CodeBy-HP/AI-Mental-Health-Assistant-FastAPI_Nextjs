@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { Disclosure, Menu } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
@@ -6,6 +6,16 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import {
+  UserIcon,
+  CogIcon,
+  ArrowRightOnRectangleIcon,
+  ChartBarIcon,
+  ClockIcon,
+  ChatBubbleBottomCenterTextIcon,
+  DocumentTextIcon,
+  BookOpenIcon,
+} from "@heroicons/react/24/outline";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -31,8 +41,17 @@ export default function DashboardTemplate() {
 
   if (!user) {
     return (
-      <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-slate-50 to-indigo-50">
-        <div className="animate-pulse text-indigo-600">Loading...</div>
+      <div className="flex justify-center items-center h-screen w-screen bg-gradient-to-br from-white to-gray-50">
+        <div className="flex flex-col items-center">
+          <div className="w-16 h-16 relative">
+            <div className="absolute top-0 w-full h-full rounded-full border-4 border-t-blue-500 border-r-transparent border-b-transparent border-l-transparent animate-spin"></div>
+            <div
+              className="absolute top-2 left-2 w-12 h-12 rounded-full border-4 border-t-transparent border-r-transparent border-b-blue-300 border-l-transparent animate-spin"
+              style={{ animationDirection: "reverse" }}
+            ></div>
+          </div>
+          <p className="mt-4 text-gray-500 font-medium">Connecting...</p>
+        </div>
       </div>
     );
   }
@@ -51,11 +70,9 @@ export default function DashboardTemplate() {
                 {/* Logo and Navigation Links */}
                 <div className="flex items-center">
                   <div className="shrink-0">
-                    <img
-                      alt="Logo"
-                      src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=white&shade=300"
-                      className="h-8 w-8 hover:scale-110 transition-transform duration-200"
-                    />
+                    <div className="h-8 w-8 rounded-md bg-gradient-to-r from-blue-400 to-indigo-700 flex items-center justify-center text-white font-bold mr-3">
+                      AI
+                    </div>
                   </div>
                   <div className="hidden md:block">
                     <div className="ml-10 flex items-baseline space-x-4">
@@ -244,7 +261,7 @@ export default function DashboardTemplate() {
 
       {/* Header */}
       <header className="bg-white/80 backdrop-blur-sm shadow-sm">
-        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 flex items-center space-x-6">
+        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 flex items-center space-x-6">
           <h1 className="text-4xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
             Dashboard
           </h1>
@@ -258,56 +275,116 @@ export default function DashboardTemplate() {
       <main>
         <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Example Card 1 */}
-            <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 p-6">
+            {/* Weekly Mood Assessment */}
+            <Link
+              href="/assessment/weekly-assessment"
+              className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 p-6 block"
+            >
               <div className="flex items-center justify-between">
                 <h3 className="text-lg font-semibold text-gray-800">
-                  Quick Stats
+                  Weekly Mood Assessment
                 </h3>
                 <div className="p-2 bg-indigo-100 rounded-lg">
                   <ChartBarIcon className="w-6 h-6 text-indigo-600" />
                 </div>
               </div>
-              <div className="mt-4 space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-600">Active Projects</span>
-                  <span className="font-medium text-indigo-600">12</span>
-                </div>
-                {/* Add more stats here */}
-              </div>
-            </div>
+              <p className="mt-4 text-gray-600 text-sm">
+                Take a quick assessment each week to track your mood and receive personalized tips.
+              </p>
+            </Link>
 
-            {/* Example Card 2 */}
-            <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 p-6">
+            {/* Assessment History */}
+            <Link
+              href="/assessment/weekly-history"
+              className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 p-6 block"
+            >
               <div className="flex items-center justify-between">
                 <h3 className="text-lg font-semibold text-gray-800">
-                  Recent Activity
+                  Assessment History
                 </h3>
                 <div className="p-2 bg-indigo-100 rounded-lg">
                   <ClockIcon className="w-6 h-6 text-indigo-600" />
                 </div>
               </div>
-              <div className="mt-4 space-y-3">
-                <div className="text-sm text-gray-600">
-                  New project "Dashboard UI" created
-                </div>
-                {/* Add more activity items here */}
-              </div>
-            </div>
+              <p className="mt-4 text-gray-600 text-sm">
+                Review your past assessments and monitor your progress over time.
+              </p>
+            </Link>
 
-            {/* Add more cards as needed */}
+            {/* AI Chatbot */}
+            <Link
+              href="/chat"
+              className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 p-6 block"
+            >
+              <div className="flex items-center justify-between">
+                <h3 className="text-lg font-semibold text-gray-800">
+                  AI Chatbot
+                </h3>
+                <div className="p-2 bg-indigo-100 rounded-lg">
+                  <ChatBubbleBottomCenterTextIcon className="w-6 h-6 text-indigo-600" />
+                </div>
+              </div>
+              <p className="mt-4 text-gray-600 text-sm">
+                Chat with our AI mental health therapist for on-demand support and guidance.
+              </p>
+            </Link>
+
+            {/* Resources */}
+            <Link
+              href="/resources"
+              className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 p-6 block"
+            >
+              <div className="flex items-center justify-between">
+                <h3 className="text-lg font-semibold text-gray-800">
+                  Resources
+                </h3>
+                <div className="p-2 bg-indigo-100 rounded-lg">
+                  <BookOpenIcon className="w-6 h-6 text-indigo-600" />
+                </div>
+              </div>
+              <p className="mt-4 text-gray-600 text-sm">
+                Access helpful articles, guides, and tools to support your mental wellness journey.
+              </p>
+            </Link>
+
+            {/* Personalized Insights */}
+            <Link
+              href="/assessment/insights"
+              className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 p-6 block"
+            >
+              <div className="flex items-center justify-between">
+                <h3 className="text-lg font-semibold text-gray-800">
+                  Personalized Insights
+                </h3>
+                <div className="p-2 bg-indigo-100 rounded-lg">
+                  <DocumentTextIcon className="w-6 h-6 text-indigo-600" />
+                </div>
+              </div>
+              <p className="mt-4 text-gray-600 text-sm">
+                Review trends and data-driven insights from your assessments to better understand your progress.
+              </p>
+            </Link>
+
+            {/* Mindfulness Exercises */}
+            <Link
+              href="/exercises"
+              className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 p-6 block"
+            >
+              <div className="flex items-center justify-between">
+                <h3 className="text-lg font-semibold text-gray-800">
+                  Mindfulness Exercises
+                </h3>
+                <div className="p-2 bg-indigo-100 rounded-lg">
+                  <CogIcon className="w-6 h-6 text-indigo-600" />
+                </div>
+              </div>
+              <p className="mt-4 text-gray-600 text-sm">
+                Explore guided exercises and meditations designed to reduce stress and boost mindfulness.
+              </p>
+            </Link>
           </div>
         </div>
       </main>
     </div>
   );
 }
-
-// Add these icons to your imports
-import {
-  UserIcon,
-  CogIcon,
-  ArrowRightOnRectangleIcon,
-  ChartBarIcon,
-  ClockIcon,
-} from "@heroicons/react/24/outline";
